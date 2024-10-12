@@ -1,0 +1,49 @@
+<div class="page-header">
+    <br>
+    <h4 style="text-align: center;">Crear Categoria</h4>
+    <br>
+</div>
+
+<div class="container">
+    <div class="row ">
+
+        <form [formGroup]="formulario" (ngSubmit)="crearCategoria()">
+            <div class="row">
+
+                <div class="btn-group col-md-2"></div>
+
+                <div class="form-group col-md-8">
+                    <label>Nombre<span class="required-mark"></span></label><br>
+                    <input id="nombre" class="form-control" formControlName="nombre" type="text" />
+                    <span *ngIf="formulario.get('nombre')?.invalid" class="text-danger">campo requerido</span>
+                    <span *ngIf="formulario.get('nombre')?.errors?.minlength" class="text-danger"> minimo 3 carácteres</span>
+                    <span *ngIf="formulario.get('nombre')?.errors?.maxlength" class="text-danger"> maxímo 15 carácteres</span>
+                </div> 
+
+                <div class="btn-group col-md-2"></div>
+
+                          
+                <div class="btn-group col-md-8"></div>
+
+                <div class="col-md-2">
+                    <br><br>
+                    <div class="btn-group" style="float: left;">
+                        <a class="btn btn-default pgui-add" routerLink="/listaCategorias" title="Volver">
+                            <span class="visible-lg-inline">Volver</span></a>
+                    </div>
+                    &nbsp;
+                    <div class="btn-group">
+                        <button class="btn btn-primary js-save js-primary-save" type="submit"
+                            [disabled]="formulario.invalid">Enviar</button>
+                    </div>
+                </div>
+                
+                <div class="btn-group col-md-2"></div>
+
+                
+            </div>
+        </form>
+    </div>
+    <br>
+    <br>
+</div>

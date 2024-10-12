@@ -1,0 +1,103 @@
+<br>
+<br>
+<div class="page-header">
+    <h4 style="text-align: center;">Crear Empleado</h4>
+</div>
+
+<div class="container">
+    <div class="row ">
+
+        <form [formGroup]="formulario" (ngSubmit)="crearEmpleado()">
+            <div class="row">
+
+                <div class="form-group col-md-4">
+                    <label>Nombre<span class="required-mark"></span></label><br>
+                    <input id="nombre" class="form-control" formControlName="nombre" type="text" />
+                    <span *ngIf="formulario.get('nombre')?.invalid" class="text-danger">campo requerido</span>
+                    <span *ngIf="formulario.get('nombre')?.errors?.minlength" class="text-danger"> minimo 3 carácteres</span>
+                    <span *ngIf="formulario.get('nombre')?.errors?.maxlength" class="text-danger"> maxímo 15 carácteres</span>
+                </div> 
+
+                <div class="form-group col-md-4">
+                    <label>Apellido<span class="required-mark"></span></label><br>
+                    <input id="apellido" class="form-control" formControlName="apellido" type="text" />
+                    <span *ngIf="formulario.get('apellido')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formulario.get('apellido')?.errors?.minlength" class="text-danger"> minimo 3 carácteres</span>
+                    <span *ngIf="formulario.get('apellido')?.errors?.maxlength" class="text-danger"> maxímo 15 carácteres</span>
+                </div> 
+
+                <div class="form-group col-md-4">
+                    <label>Número documento<span class="required-mark"></span></label><br>
+                    <input id="documento" class="form-control" formControlName="documento" type="number" />
+                    <span *ngIf="formulario.get('documento')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formulario.get('documento')?.errors?.min" class="text-danger"> minimo 5 dígitos</span>
+                    <span *ngIf="formulario.get('documento')?.errors?.max" class="text-danger"> maxímo 15 dígitos</span>
+                </div> 
+
+                <div class="form-group col-md-8">
+                    <label>Dirección<span class="required-mark"></span></label><br>
+                    <input id="direccion" class="form-control" formControlName="direccion" type="text" />
+                    <span *ngIf="formulario.get('direccion')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formulario.get('direccion')?.errors?.minlength" class="text-danger"> minimo 5 carácteres</span>
+                    <span *ngIf="formulario.get('direccion')?.errors?.maxlength" class="text-danger"> maxímo 100 carácteres</span>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label>Teléfono<span class="required-mark"></span></label><br>
+                    <input id="telefono" class="form-control" formControlName="telefono" type="number" />
+                    <span *ngIf="formulario.get('telefono')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formulario.get('telefono')?.errors?.min" class="text-danger"> minimo 7 dígitos</span>
+                    <span *ngIf="formulario.get('telefono')?.errors?.max" class="text-danger"> maxímo 10 dígitos</span>
+                </div> 
+
+                <div class="form-group col-md-4">
+                    <label>Email<span class="required-mark"></span></label><br>
+                    <input id="email" class="form-control" formControlName="email" type="text" />
+                    <span *ngIf="formulario.get('email')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formulario.get('email')?.errors?.minlength" class="text-danger"> minimo 5 carácteres</span>
+                    <span *ngIf="formulario.get('email')?.errors?.maxlength" class="text-danger"> maxímo 100 carácteres</span>
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label>Contraseña<span class="required-mark"></span></label><br>
+                    <input id="password" class="form-control" formControlName="password" type="password" />
+                    <span *ngIf="formulario.get('password')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formulario.get('password')?.errors?.minlength" class="text-danger"> minimo 2 carácteres</span>
+                    <span *ngIf="formulario.get('password')?.errors?.maxlength" class="text-danger"> maxímo 100 carácteres</span>
+                
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label for="categoria">Rol:<span class="required-mark"></span></label><br>
+                    <ng-select [items]="roles" [multiple]="false" [closeOnSelect]="true" bindLabel="nombre"
+                        formControlName="idrol">
+                    </ng-select>
+                    <span *ngIf="formulario.get('idrol')!.invalid" class="text-danger"> Requerido</span>
+                </div> 
+
+
+              
+
+                <div class="col-md-12">
+                    <div class="btn-group col-md-4"></div>
+                    <div class="btn-group col-md-6"></div>
+
+                    <div class="btn-group col-md-2">
+                        <br><br>
+                        <div class="btn-group" style="float: left;">
+                            <a class="btn btn-default pgui-add" routerLink="/listaEmpleados" title="Volver">
+                                <span class="visible-lg-inline">Volver</span></a>
+                        </div>
+                        &nbsp;
+                        <div class="btn-group col-md-2">
+                            <button class="btn btn-primary js-save js-primary-save" type="submit"
+                                [disabled]="formulario.invalid">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <br>
+</div>

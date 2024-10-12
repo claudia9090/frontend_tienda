@@ -1,0 +1,91 @@
+<br>
+<br>
+<div>
+    <h3 style="text-align: center;">
+        Gestión de Empleados
+    </h3>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+
+        <div class="btn-group">
+            <a class="btn btn-md" style="background-color: #22fa5c; font-weight: bold;" routerLink="/crearEmpleado" title="crear categoria">
+                <i class="bi bi-plus"></i>
+                <span>Crear Empleado</span>
+            </a>
+        </div>
+
+        <br>
+        <br>
+        <br>
+    
+        <table class="table text-center table-striped" aria-labelledby="empleado" *ngIf="listEmpleados.length > 0">
+            <thead class="pg-row-list">
+                <tr>
+                    <th colspan="1" rowspan="1">
+                        <span>Editar</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Nombre</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Apellido</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span># Documento</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Correo</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Telefono</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Rol</span>
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody class="pg-row-list">
+                <tr *ngFor="let item of listEmpleados | paginate: {itemsPerPage: 5, currentPage: pageNow, id:'pagTable'}">
+                    <td class="pgui-cell-edit">
+                        <a routerLink="/actualizarEmpleado/{{item.id}}">{{item.id}} <i class="bi bi-pencil-square"></i> </a>
+                    </td>
+                    <td class="pgui-cell-edit">{{item.nombre}}</td>
+                    <td class="pgui-cell-edit">{{item.apellido}}</td>
+                    <td class="pgui-cell-edit">{{item.numero_doc}}</td>
+                    <td class="pgui-cell-edit">{{item.email}}</td>
+                    <td class="pgui-cell-edit">{{item.telefono}}</td>
+                    <td class="pgui-cell-edit">{{item.rol}}</td>
+                </tr>
+
+                <tr class="pg-row">
+                    <td class="pgui-cell-edit" colspan="20" rowspan="1">
+                        <pagination-controls
+                        id="pagTable"
+                        (pageChange)="pageNow = $event"
+                        previousLabel="anterior"
+                        nextLabel="siguiente">
+                        </pagination-controls>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1">
+    </div>
+</div>

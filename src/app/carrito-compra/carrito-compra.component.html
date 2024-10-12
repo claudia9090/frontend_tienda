@@ -1,0 +1,99 @@
+<div class="album py-4 bg-light">
+    <div class="container" *ngIf="nombreRol == 'CLIENTE'">
+        <div class="row">
+            
+            <div class="col-9">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+                    <ul *ngFor="let item of listaProductosCarrito">
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <!-- {{< placeholder width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail" >}} -->
+                                <img [src]="item.imagen" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{item.nombre}}.</h5>
+                                    <p class="card-text" style="font-weight: bold;">{{item.precio | currency}}</p>
+                                    <button (click)="eliminarProductoCarrito(item)" class="btn btn-sm"
+                                        style="background-color: #f3d61a; font-weight: bold;">Eliminar
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="">
+                    <div class="row">
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h4 class="card-title" style="font-weight: bold;">TOTAL ORDEN</h4>
+                                        <h4 class="card-text" style="font-weight: bold;">{{totalOrden | currency}}</h4>
+                                        <div class="d-grid gap-2">
+
+                                            <form *ngIf="listaProductosCarrito.length > 0" [formGroup]="formulario">
+                                                <div class="row">
+                                    
+                                                    <div class="form-group col-md-12">
+                                                        <label style="font-weight: bold;">Información de la tarjeta<span class="required-mark"></span></label><br>
+                                                        <input id="tarjeta" placeholder="1234 1234 1234 1234" [(ngModel)]="tarjeta" class="form-control" formControlName="tarjeta" type="text" />
+                                                        <span *ngIf="formulario.get('tarjeta')?.invalid" class="text-danger">campo requerido</span>
+                                                    </div> 
+
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                    
+                                                     <div class="form-group col-md-12">
+                                                        <label style="font-weight: bold;">Vencimiento<span class="required-mark"></span></label><br>
+                                                        <input id="vencimiento" [(ngModel)]="vencimiento" class="form-control" formControlName="vencimiento" type="month" min="{{fechaMinima}}" />
+                                                        <span *ngIf="formulario.get('vencimiento')?.invalid" class="text-danger"> campo requerido</span>
+                                                    </div>
+                                                    
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                    
+                                                    <div class="form-group col-md-12">
+                                                        <label style="font-weight: bold;">CVC<span class="required-mark"></span></label><br>
+                                                        <input id="cvc" [(ngModel)]="cvc" class="form-control" formControlName="cvc" type="number" />
+                                                        <span *ngIf="formulario.get('cvc')?.invalid" class="text-danger"> requerido, ingresar 3 digitos</span>
+                                                    </div> 
+
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                    
+                                                    <div class="form-group col-md-12">
+                                                        <label style="font-weight: bold;">Nombre del titular de la tarjeta<span class="required-mark"></span></label><br>
+                                                        <input id="titular" [(ngModel)]="titular" class="form-control" formControlName="titular" type="text" />
+                                                        <span *ngIf="formulario.get('titular')?.invalid" class="text-danger"> campo requerido</span>
+                                                        <span *ngIf="formulario.get('titular')?.errors?.minlength" class="text-danger"> minimo 5 carácteres</span>
+                                                        <span *ngIf="formulario.get('titular')?.errors?.maxlength" class="text-danger"> maxímo 100 carácteres</span>
+                                                    </div>
+
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    
+                                                 
+                                                </div>
+                                            </form>
+
+                                            <button (click)="pagarOrden()" [disabled]="formulario.invalid || listaProductosCarrito.length == 0" class="btn btn-lg"
+                                                style="background-color: #22fa5c; font-weight: bold;">PAGAR
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

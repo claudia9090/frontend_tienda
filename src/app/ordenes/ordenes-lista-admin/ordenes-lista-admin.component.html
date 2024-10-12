@@ -1,0 +1,157 @@
+
+<block-ui>
+<br>
+<br>
+<div>
+    <h3 style="text-align: center;">
+        Gestión de Ordenes
+    </h3>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+
+        <div class="btn-group">
+            <a class="btn btn-md" style="background-color: #22fa5c; font-weight: bold;" (click)="actualizar()" title="actualizar">
+                <i class="bi bi-arrow-clockwise"></i>
+                <span>Actualizar</span>
+            </a>
+        </div>
+
+        <br>
+        <br>
+    
+        <table class="table text-center table-striped" aria-labelledby="empleado" *ngIf="listaOrdenes.length > 0">
+            <thead class="pg-row-list">
+                <tr>
+                    <th colspan="1" rowspan="1">
+                        <span>Orden de compra</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Código Comprobante</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Total</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Fecha de compra</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Nombre</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Apellido</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Celular</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>email</span>
+                    </th>
+
+                    <th colspan="1" rowspan="1">
+                        <span>Estado Orden</span>
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody class="pg-row-list">
+                <tr *ngFor="let item of listaOrdenes | paginate: {itemsPerPage: 5, currentPage: pageNow, id:'pagTable'}">
+                    <td class="pgui-cell-edit">
+                        <a (click)="listaProductorByOrden(item.id)" data-bs-toggle="modal" data-bs-target="#modalProductosA">{{item.id}} <i class="bi bi-list-check"></i></a>
+                    </td>
+                    <td class="pgui-cell-edit">{{item.numero_comprobante}}</td>
+                    <td class="pgui-cell-edit">{{item.total | currency}}</td>
+                    <td class="pgui-cell-edit">{{item.fecha_actualizacion | date:"EEEE, d MMMM y 'hora' hh:mm a"}}</td>
+                    <td class="pgui-cell-edit">{{item.nombreUsuario}}</td>
+                    <td class="pgui-cell-edit">{{item.apellidoUsuario}}</td>
+                    <td class="pgui-cell-edit">{{item.telefono}}</td>
+                    <td class="pgui-cell-edit">{{item.email}}</td>
+                    <td class="pgui-cell-edit">
+                        <a (click)="actualizarOrden(item.id)">{{item.statusOrden}} <i class="bi bi-pencil-square"></i> </a>
+                    </td>
+                </tr>
+
+                <tr class="pg-row">
+                    <td class="pgui-cell-edit" colspan="20" rowspan="1">
+                        <pagination-controls
+                        id="pagTable"
+                        (pageChange)="pageNow = $event"
+                        previousLabel="anterior"
+                        nextLabel="siguiente">
+                        </pagination-controls>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1">
+    </div>
+</div>
+<!-- Modal productos -->
+<div class="modal fade" id="modalProductosA" tabindex="-1" aria-labelledby="modalProductosA" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Productos de la orden</h1>
+          <button type="button" class="btn-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <main>
+                <div class="album py-4 bg-light">
+                    <div class="container">
+                    
+                        <div class="row">
+                            
+        
+                            <div class="col-12">
+        
+                                <div *ngIf="listaProductos.length == 0" class="">
+                                    <ul>
+                                        <div class="col">
+                                            <div class="card shadow-sm">
+                                                <img src='../../../assets/noproduct.png' class="" alt="...">
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+        
+                                <div *ngIf="listaProductos.length > 0" class="row row-cols-2  g-2">
+                                    <ul *ngFor="let item of listaProductos">
+                                        <div class="col">
+                                            <div class="card shadow-sm">
+                                                <img [src]='item.imagen' class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{item.nombre}}.</h5>
+                                                    <p class="card-text" style="font-weight: bold;">{{item.descripcion}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <br>
+      </div>
+    </div>
+</div>
+
+</block-ui>

@@ -1,0 +1,120 @@
+<block-ui>
+<!-- <div class="container-fluid">
+    <div class="row ">
+
+        <div class="col-2  fila">
+            <div class="lista-categorias">
+
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item " id="list-profile-list" style="background-color: #EC9704; font-weight: bold;">CATEGORIAS</a>
+                </div>
+                <div class="list-group" *ngFor="let item of categorias" id="list-tab" role="tablist">
+                    <a class="list-group-item " id="list-profile-list"
+                        (click)="clickCategoria(item)">{{item.nombre}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-10 fila">
+            <div class="row  justify-content-start row-cols-xs-1
+             row-cols-ms-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4">
+
+                <ul *ngFor="let item of productos">
+                    <div class="col">
+                        <div class="card card-custom position-relative">
+                            <img src="../../assets/memoria.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.nombre}}.</h5>
+                                <p class="card-text" style="font-weight: bold;">{{item.precio}}</p>
+                                <button class="btn btn-dark">Comprar
+                                    <i class="bi bi-cart3"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+    </div> -->
+    <main>
+        <div class="album py-4 bg-light">
+            <div class="container">
+    
+                <!-- <div class="row row-cols-12 fila">
+                    <div class="col columna">columna 1</div>
+                    <div class="col columna">columna 2</div>
+                    <div class="col columna">columna 3</div>
+                    <div class="col columna">columna 4</div>
+                    <div class="col columna">columna 5</div>
+                    <div class="col columna">columna 6</div>
+                    <div class="col columna">columna 7</div>
+                    <div class="col columna">columna 8</div>
+                    <div class="col columna">columna 9</div>
+                    <div class="col columna">columna 10</div>
+                    <div class="col columna">columna 11</div>
+                    <div class="col columna">columna 12</div>
+                </div> -->
+    
+                <div class="row">
+                    <div class="col-2">
+                        <div class="lista-categorias">
+                            <div class="list-group" id="" role="">
+                                <a class="list-group-item " id="list-profile-list"
+                                    style="background-color: #EC9704; font-weight: bold;" (click)="listaProductos(this.nombreRol)">CATEGORIAS</a>
+                            </div>
+                            <div class="list-group" *ngFor="let item of categorias" id="list-tab" role="tablist">
+                                <a class="list-group-item " id="list-profile-list"
+                                    (click)="clickCategoria(item)">{{item.nombre}}
+                                </a>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="col-10">
+
+                        <div *ngIf="productos.length == 0" class="">
+                            <ul>
+                                <div class="col">
+                                    <div class="card shadow-sm">
+                                        <img src='../../../assets/noproduct.png' class="" alt="...">
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="productos.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+                            <ul *ngFor="let item of productos">
+                                <div class="col">
+                                    <div class="card shadow-sm">
+                                        <!-- {{< placeholder width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail" >}} -->
+                                        <img [src]='item.imagen' class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{item.nombre}}.</h5>
+                                            <p class="card-text" style="font-weight: bold;">{{item.precio | currency}}</p>
+                                            <button *ngIf="nombreRol == 'CLIENTE'" (click)="agregarProductoCarrito(item.id)"  class="btn btn-sm" style="background-color: #22fa5c; font-weight: bold;">Comprar
+                                                <i class="bi bi-cart3"></i>
+                                            </button>
+                                            <button *ngIf="nombreRol == 'ADMIN' || nombreRol == 'EMPLEADO' "  routerLink="/actualizarProducto/{{item.id}}" class="btn btn-sm" style="background-color: #22fa5c; font-weight: bold;">Actualizar
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                            <!-- <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-secondary">View</button>
+                                                        <button type="button"
+                                                            class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                    </div>
+                                                    <small class="text-muted">9 mins</small>
+                                                </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</block-ui>

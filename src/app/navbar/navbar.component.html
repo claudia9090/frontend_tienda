@@ -1,0 +1,240 @@
+<div class="container-fluid navbarcustom" *ngIf="nombreRol == 'NONE'">
+  <div class="row justify-content-between">
+
+    <div class="col-auto">
+      <a class="navbar-brand"style="font-weight: bold;"  routerLink="/home" (click)="listaProductos(this.nombreRol)" >COMPUTERS SHOP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div *ngIf="ocultarBusqueda" class="col-6">
+      <form [formGroup]="formSearch" class="d-flex" (ngSubmit)="listaProductosByBusqueda()">
+        <input class="form-control" formControlName="search" type="search" placeholder="Buscar" aria-label="Search">
+        <i class="bi bi-search icono_busqueda"></i>
+      </form>
+    </div>
+
+    <div class="col-auto d-flex">
+      <div class="col-auto">
+        <ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Mi cuenta
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/registro">Registrarse</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLogin" >Ingresar</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid navbarcustom" *ngIf="nombreRol == 'CLIENTE'">
+  <div class="row justify-content-between">
+
+    <div class="col-auto">
+      <a class="navbar-brand"style="font-weight: bold;"  routerLink="/home" (click)="listaProductos(this.nombreRol)" >COMPUTERS SHOP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div *ngIf="ocultarBusqueda" class="col-6">
+      <form [formGroup]="formSearch" class="d-flex" (ngSubmit)="listaProductosByBusqueda()">
+        <input class="form-control" formControlName="search" type="search" placeholder="Buscar" aria-label="Search">
+        <i class="bi bi-search icono_busqueda"></i>
+      </form>
+    </div>
+
+    <div *ngIf="ocultarBusqueda" class="col-auto">
+      {{currentDate | date: 'dd-MM-YYYY HH:mm.ss'}}
+    </div>
+
+
+    <div class="col-auto d-flex">
+
+      <div class="col-auto" *ngIf="cantidadProductosCar > 0">
+        <a href="#" class="" routerLink="/carritoCompra">
+          <i class="bi bi-cart3 position-relative carrito">
+            <span class="badge rounded-pill bg-danger">
+                  {{cantidadProductosCar}}
+            </span>
+          </i>
+        </a>
+      </div>
+
+      <div class="col-auto" *ngIf="cantidadProductosCar == 0">
+        <a class="">
+          <i class="bi bi-cart3 position-relative carrito">
+            <span class="badge rounded-pill bg-danger">
+                  {{cantidadProductosCar}}
+            </span>
+          </i>
+        </a>
+      </div>
+
+      <div class="col-auto">
+        <ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="font-weight: bold;"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hola, {{nombreUsuario}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item"  routerLink="/listaOrdenesCliente">Historial ordenes</a></li>
+              <li><a class="dropdown-item"  routerLink="/actualizarUsuario">Actualizar Datos</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUpdatePassword" >Actualizar contraseña</a></li>
+              <li><a class="dropdown-item" (click)="cerrarSesion()" routerLink="/">Cerrar Sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container-fluid navbarcustom" *ngIf="nombreRol == 'ADMIN' || nombreRol == 'EMPLEADO'">
+  <div class="row justify-content-between">
+
+    <div class="col-auto">
+      <a class="navbar-brand"style="font-weight: bold;"  routerLink="/home" (click)="listaProductos(this.nombreRol)" >COMPUTERS SHOP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div *ngIf="ocultarBusqueda" class="col-6">
+      <form [formGroup]="formSearch" class="d-flex" (ngSubmit)="listaProductosByBusqueda()">
+        <input class="form-control" formControlName="search" type="search" placeholder="Buscar" aria-label="Search">
+        <i class="bi bi-search icono_busqueda"></i>
+      </form>
+    </div>
+
+
+    <div class="col-auto d-flex">
+      <div class="col-auto">
+        <ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="font-weight: bold;"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hola, {{nombreUsuario}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item"  routerLink="/listaCategorias">Gestionar categorias</a></li>
+              <li><a class="dropdown-item"  routerLink="/crearProducto">Crear producto</a></li>
+              <li><a class="dropdown-item"  routerLink="/listaOrdenesAdmin">Gestionar ordenes</a></li>
+              <li *ngIf="nombreRol == 'ADMIN'"><a class="dropdown-item"  routerLink="/listaEmpleados">Gestionar Empleados</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalUpdatePassword" >Actualizar contraseña</a></li>
+              <li><a class="dropdown-item" (click)="cerrarSesion()" routerLink="/">Cerrar Sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<br>
+<br>
+
+
+<!-- Modal Login -->
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="modalLogin" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Iniciar Sesión</h1>
+        <button type="button" class="btn-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion($event)">
+          <div class="mb-3">
+            <label for="email" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="emaillLogin" formControlName="email">
+            <span *ngIf="formLogin.get('email')?.invalid" class="text-danger">campo requerido.</span>
+          </div>
+
+          <div class="mb-3">
+            <label for="passwordL" class="col-form-label">Password:</label>
+            <input type="password" class="form-control" id="passwordd" formControlName="password">
+            <span *ngIf="formLogin.get('password')?.invalid" class="text-danger">campo requerido.</span>
+          </div>
+
+          <div class="mb-3 text-center">
+            <button type="submit" [disabled]="formLogin.invalid" class="btn btn-primary">Ingresar</button>
+          </div>
+
+        </form>
+      </div>
+      <a class="text-center" data-bs-toggle="modal" data-bs-target="#modalRecuperarPassword" (click)="cerrarModal()">Recuperar contraseña</a>
+      <br>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalRecuperarPassword" tabindex="-1" aria-labelledby="modalRecuperarPassword" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Recuperar Contraseña</h1>
+        <button type="button" class="btn-close" id="closeModalRecuperarPassword" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formRecuperarPassword" (ngSubmit)="recuperarPassword($event)">
+          <div class="mb-3">
+            <label for="email" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="emaill" formControlName="email">
+            <span *ngIf="formRecuperarPassword.get('email')?.invalid" class="text-danger">campo requerido.</span>
+          </div>
+
+          <div class="mb-3 text-center">
+            <button type="submit" [disabled]="formRecuperarPassword.invalid" class="btn btn-primary">Enviar</button>
+          </div>
+
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalUpdatePassword" tabindex="-1" aria-labelledby="modalUpdatePassword" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar Contraseña</h1>
+        <button type="button" class="btn-close" id="closeModalUpdatePassword" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formActualizarPassword" (ngSubmit)="actualizarPassword()">
+          
+          <div class="mb-3">
+            <label for="passwordOld" class="col-form-label">Contraseña anterior:</label>
+            <input type="text" class="form-control" id="passwordOld" formControlName="passwordOld">
+            <span *ngIf="formActualizarPassword.get('passwordOld')?.invalid" class="text-danger">campo requerido.</span>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="col-form-label">Contraseña Nueva:</label>
+            <input type="text" class="form-control" id="password" formControlName="password">
+            <span *ngIf="formActualizarPassword.get('password')?.invalid" class="text-danger">campo requerido.</span>
+          </div>
+
+          <div class="mb-3 text-center">
+            <button type="submit" [disabled]="formActualizarPassword.invalid" class="btn btn-primary">Enviar</button>
+          </div>
+
+        </form>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

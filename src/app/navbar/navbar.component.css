@@ -1,0 +1,44 @@
+.fila {
+    border: 3px solid blue;
+    background-color: lightblue;
+    margin-bottom: 1px;
+    padding: 3px;
+
+}
+
+.columna {
+    background-color: lightgreen;
+    border: 2px solid green;
+    padding: 10px;
+}
+
+ul {
+    list-style: none;
+}
+
+.navbarcustom{
+    background-color: #EC9704;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: fixed;
+    z-index: 1000;
+}
+
+.icono_busqueda{
+    padding-top: 5px;
+    padding-left: 3px;
+}
+.carrito{
+    color: black;
+    font-size: 22px;
+}
+
+.carrito span{
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+}
+
+.modal-backdrop {
+    z-index: -1;
+  }

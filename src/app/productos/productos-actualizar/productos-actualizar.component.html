@@ -1,0 +1,135 @@
+<div class="page-header">
+    <br>
+        <h2 style="text-align: center;">Actualizar producto</h2>
+    <br>
+</div>
+
+<div class="container">
+    <div class="row ">
+
+        <div class="row ">
+
+            <div class="form-group col-sm-6">
+                <div class="card shadow-sm">
+                    <h3 class="card-title" style="text-align: center;">Imagen actual</h3>
+                    <img style="width: 70% " [src]='imagen' class="card-img-top d-flex  align-items-center" alt="...">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="file" class="form-control"  (change)="agregarImagen($event)"  id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+                            <button [disabled]="!imagenPreview" class="btn btn-primary" (click)="actualizarImagenProducto()">actualizar imagen</button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="imagenPreview">
+                        <img style="width: 65% " [src]='imagenPreview' class="card-img-top" alt="...">
+                    </div>
+
+                    <div *ngIf="!imagenPreview">
+                        <img style="width: 65% " src='../../../assets/imageEmpty.jpg' class="card-img-top" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="page-header">
+            <br>
+            <h4 style="text-align: center;">Actualizar información del producto</h4>
+        </div>
+
+        <form [formGroup]="formCrearProducto" (ngSubmit)="actualizarProducto()">
+            <div class="row">
+
+                <div class="form-group col-md-8">
+                    <label>Nombre<span class="required-mark"></span></label><br>
+                    <input id="nombre" class="form-control" formControlName="nombre" [(ngModel)]="nombre" type="text" />
+                    <span *ngIf="formCrearProducto.get('nombre')?.invalid" class="text-danger">campo requerido</span>
+                    <span *ngIf="formCrearProducto.get('nombre')?.errors?.minlength" class="text-danger"> minimo 3 carácteres</span>
+                    <span *ngIf="formCrearProducto.get('nombre')?.errors?.maxlength" class="text-danger"> maxímo 50 carácteres</span>
+                </div> 
+
+                <div class="form-group col-md-2">
+                    <label>Precio<span class="required-mark"></span></label><br>
+                    <input id="precio" class="form-control" formControlName="precio" [(ngModel)]="precio" type="number" />
+                    <span *ngIf="formCrearProducto.get('precio')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formCrearProducto.get('precio')?.errors?.min" class="text-danger"> minimo 1 </span>
+                    <span *ngIf="formCrearProducto.get('precio')?.errors?.max" class="text-danger"> maxímo 100.000.000</span>
+                </div> 
+
+                <div class="form-group col-md-2">
+                    <label>Stock<span class="required-mark"></span></label><br>
+                    <input id="stock" class="form-control" formControlName="stock" [(ngModel)]="stock" type="number" />
+                    <span *ngIf="formCrearProducto.get('stock')?.invalid" class="text-danger"> campo requerido</span>
+                    <span *ngIf="formCrearProducto.get('stock')?.errors?.min" class="text-danger"> minimo 1 </span>
+                    <span *ngIf="formCrearProducto.get('stock')?.errors?.max" class="text-danger"> maxímo 1.000.000</span>
+                </div> 
+
+
+                <div class="form-group col-md-6">
+                    <label>Descripción<span class="required-mark"></span></label><br>
+                    <textarea id="descripcion" class="form-control" formControlName="descripcion" [(ngModel)]="descripcion" type=""></textarea>
+                    <span *ngIf="formCrearProducto.get('descripcion')?.invalid" class="text-danger">campo requerido</span>
+                    <span *ngIf="formCrearProducto.get('descripcion')?.errors?.minlength" class="text-danger"> minimo 3 carácteres</span>
+                    <span *ngIf="formCrearProducto.get('descripcion')?.errors?.maxlength" class="text-danger"> maxímo 10.000 carácteres</span>
+                </div>
+
+                <div class="form-group col-md-3">      
+                    <label>Estado:<span class="required-mark"></span></label><br>
+                    <ng-select  formControlName="itemEstado" [(ngModel)]="itemEstado">
+                        <ng-option [value]="item.id" *ngFor="let item of listaEstados">
+                            {{item.name}}
+                        </ng-option>
+                    </ng-select>
+                    <span *ngIf="formCrearProducto.get('itemEstado')?.invalid" class="text-danger"> Requerido</span>
+                </div>
+
+
+                <div class="form-group col-md-3">
+                    <label for="categoria">Categoria:<span class="required-mark"></span></label><br>
+                    <ng-select [items]="categorias" [multiple]="false" [closeOnSelect]="true"
+                        [(ngModel)]="idcategoria" bindLabel="nombre" bindValue="id" formControlName="idcategoria">
+                    </ng-select>
+                    <span *ngIf="formCrearProducto.get('idcategoria')!.invalid" class="text-danger"> Requerido</span>
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <div class="btn-group col-md-4"></div>
+                <div class="btn-group col-md-6"></div>
+
+                    <div class="btn-group col-md-2">
+                        <br><br>
+                        <div class="btn-group" style="float: left;">
+                            <a class="btn btn-default pgui-add" routerLink="/home" title="Volver">
+                                <span class="visible-lg-inline">Volver</span></a>
+                        </div>
+                        &nbsp;
+                        <div class="btn-group">
+                            <button class="btn btn-primary js-save js-primary-save" type="submit"
+                                [disabled]="formCrearProducto.invalid">Enviar</button>
+                        </div>
+                    </div>
+            </div>
+        </form>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+    <br>
+    <br>
+</div>
