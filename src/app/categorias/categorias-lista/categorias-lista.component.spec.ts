@@ -1,26 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ProductosListaComponent } from './productos-lista.component';
+import { CategoriasListaComponent } from './categorias-lista.component';
 import { BlockUIModule } from 'ng-block-ui';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-describe('Lista de productos', () => {
-  let component: ProductosListaComponent;
-  let fixture: ComponentFixture<ProductosListaComponent>;
+describe('Lista de categorias', () => {
+  let component: CategoriasListaComponent;
+  let fixture: ComponentFixture<CategoriasListaComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ProductosListaComponent],
-      providers: [ProductosListaComponent],
+      declarations: [CategoriasListaComponent],
+      providers: [CategoriasListaComponent],
       imports: [HttpClientTestingModule, BlockUIModule.forRoot(), NgSelectModule],
 
     });
-    fixture = TestBed.createComponent(ProductosListaComponent);
+    fixture = TestBed.createComponent(CategoriasListaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('Deberia mostrar el componente lista de productos', () => {
+  it('Deberia mostrar el componente lista de categorias', () => {
     expect(component).toBeTruthy();
   });
 });
