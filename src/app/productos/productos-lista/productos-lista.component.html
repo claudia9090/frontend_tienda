@@ -83,35 +83,26 @@
                             </ul>
                         </div>
 
-                        <div *ngIf="productos.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
-                            <ul *ngFor="let item of productos">
-                                <div class="col">
-                                    <div class="card shadow-sm">
-                                        <!-- {{< placeholder width="100%" height="225" background="#55595c" color="#eceeef" class="card-img-top" text="Thumbnail" >}} -->
+                        <div *ngIf="productos.length > 0" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                            <div class="col" *ngFor="let item of productos">
+                                <div class="card shadow-sm">
+                                    <div class="card-img-container">
                                         <img [src]='item.imagen' class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{item.nombre}}.</h5>
-                                            <p class="card-text" style="font-weight: bold;">{{item.precio | currency}}</p>
-                                            <button *ngIf="nombreRol == 'CLIENTE'" (click)="agregarProductoCarrito(item.id)"  class="btn btn-sm" style="background-color: #22fa5c; font-weight: bold;">Comprar
-                                                <i class="bi bi-cart3"></i>
-                                            </button>
-                                            <button *ngIf="nombreRol == 'ADMIN' || nombreRol == 'EMPLEADO' "  routerLink="/actualizarProducto/{{item.id}}" class="btn btn-sm" style="background-color: #22fa5c; font-weight: bold;">Actualizar
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <!-- <div class="d-flex justify-content-between align-items-center">
-                                                    <div class="btn-group">
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-outline-secondary">View</button>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                    </div>
-                                                    <small class="text-muted">9 mins</small>
-                                                </div> -->
-                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ item.nombre }}.</h5>
+                                        <p class="card-text" style="font-weight: bold;">{{ item.precio | currency }}</p>
+                                        <button *ngIf="nombreRol == 'CLIENTE'" (click)="agregarProductoCarrito(item.id)" class="btn btn-sm">Comprar
+                                            <i class="bi bi-cart3"></i>
+                                        </button>
+                                        <button *ngIf="nombreRol == 'ADMIN' || nombreRol == 'EMPLEADO'" routerLink="/actualizarProducto/{{ item.id }}" class="btn btn-sm">Actualizar
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
                                     </div>
                                 </div>
-                            </ul>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
